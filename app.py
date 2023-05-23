@@ -16,7 +16,7 @@ def merge_strings(strings):
 
 
 # Find all CSV files starting with "dataset" in the directory
-file_pattern = 'data\dataset*.csv'
+file_pattern = 'dataset*.csv'
 csv_files = glob.glob(file_pattern)
 
 # Create an empty list to store the dataframes
@@ -26,11 +26,13 @@ dataframes = []
 for file in csv_files:
     df = pd.read_csv(file)
     dataframes.append(df)
+    
 
 # bla = analise_sentimento(merge_strings(dataframes[0]['tweet'].to_list()), 0)
 
 for i, df in enumerate(dataframes):
-    analise_sentimento(merge_strings(df['tweet'].to_list()), i)
+    res = analise_sentimento(merge_strings(df['clean_tweet'].to_list()), i)
+    print(res)
     time.sleep(1/18 * 80)
 
 # for i in range(13):

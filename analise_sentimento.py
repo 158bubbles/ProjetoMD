@@ -9,7 +9,9 @@ def analise_sentimento(texto: str, i: int) -> str:
     CHAVE_API = os.getenv("CHAVE_API", None)
     modelo_engine = "text-davinci-003"
     #comando = f"Responda em uma única palavra, sendo positivo, neutro ou negativo o sentido contido no seguinte texto, sabendo que foi o Elon Musk que escreveu: '{texto}'"
-    comando = f"Identify Elon Musk's tweets regarding the value of Bitcoin, separated by \n as positive, neutral, or negative sentiment. Make the answer simple Python list. Answer only the list of sentiments, not the tweets.  \n'{texto}'"
+    #comando = f"Identify Elon Musk's tweets regarding the value of Bitcoin, separated by \n as positive, neutral, or negative sentiment. Make the answer simple Python list. Answer only the list of sentiments, not the tweets.  \n'{texto}'"
+    comando = f"Analyze the following Elon Musk's tweets and determine if the sentiment regarding the value of Bitcoin is: POSITIVE, NEGATIVE or NEUTRAL. Answer just a POSITIVE, NEGATIVE or NEUTRAL sentiment for each tweet: '{texto}'"
+
     # comando = f"Analyze the following Elon Musk's tweets and determine if the sentiment reggarding bitcoin is: positive, negative or neutral. Return only a single word, either POSITIVE, NEGATIVE or NEUTRAL in a list: {texto}"
     cabecalho = {
         "Content-Type": "application/json",
@@ -18,7 +20,7 @@ def analise_sentimento(texto: str, i: int) -> str:
 
     dados = {
         "prompt": comando,
-        "temperature": 0.0,
+        "temperature": 0,
         "max_tokens": 2047,
         "n": 1,
         "stop": None,
