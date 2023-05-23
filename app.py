@@ -10,6 +10,10 @@ import glob
 for texto in avaliacoes_tweets:
     print(texto)
 """
+def merge_strings(strings):
+    merged_string = '\n'.join(['"' + s + '"' for s in strings])
+    return merged_string
+
 
 # Find all CSV files starting with "dataset" in the directory
 file_pattern = 'data\dataset*.csv'
@@ -23,8 +27,13 @@ for file in csv_files:
     df = pd.read_csv(file)
     dataframes.append(df)
 
-analise_sentimento(dataframes[0]['tweet'].to_list(), 0)
+# bla = analise_sentimento(merge_strings(dataframes[0]['tweet'].to_list()), 0)
 
-# for i, df in enumerate(dataframes):
-#     analise_sentimento(df['tweet'].to_list(), i)
-#     time.sleep(1/18 * 80)
+for i, df in enumerate(dataframes):
+    analise_sentimento(merge_strings(df['tweet'].to_list()), i)
+    time.sleep(1/18 * 80)
+
+# for i in range(13):
+#     res = analise_sentimento(dataframes[i+22]['tweet'].to_list(), i+22)
+#     print(res)
+#     time.sleep(1/18 * 80)    

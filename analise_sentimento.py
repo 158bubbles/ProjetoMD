@@ -9,8 +9,8 @@ def analise_sentimento(texto: str, i: int) -> str:
     CHAVE_API = os.getenv("CHAVE_API", None)
     modelo_engine = "text-davinci-003"
     #comando = f"Responda em uma única palavra, sendo positivo, neutro ou negativo o sentido contido no seguinte texto, sabendo que foi o Elon Musk que escreveu: '{texto}'"
-    comando = f"Identify Elon Musk's tweets regarding the value of Bitcoin, separated by "," as positive, neutral, or negative sentiment. Make the answer simple Python list'{texto}'"
-
+    comando = f"Identify Elon Musk's tweets regarding the value of Bitcoin, separated by \n as positive, neutral, or negative sentiment. Make the answer simple Python list. Answer only the list of sentiments, not the tweets.  \n'{texto}'"
+    # comando = f"Analyze the following Elon Musk's tweets and determine if the sentiment reggarding bitcoin is: positive, negative or neutral. Return only a single word, either POSITIVE, NEGATIVE or NEUTRAL in a list: {texto}"
     cabecalho = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {CHAVE_API}"
@@ -30,6 +30,7 @@ def analise_sentimento(texto: str, i: int) -> str:
         json=dados
     )
     
+
     resposta_json = resposta.json()
     resultado = resposta_json['choices'][0]['text'].strip()
 
@@ -41,4 +42,4 @@ def analise_sentimento(texto: str, i: int) -> str:
         json.dump(data, file)
 
     print("Resultado salvo em resultado.json")
-    return resultado
+    return resposta_json

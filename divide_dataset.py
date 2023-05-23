@@ -1,6 +1,6 @@
 import pandas as pd
 
-test = pd.read_csv('test.csv')
+test = pd.read_csv('filtered_tweets.csv')
 
 def divide_dataset_by_char_sum(dataset, column_name, max_chars_threshold):
     dataset_sorted = dataset.sort_values(by=column_name, key=lambda x: x.str.len(), ascending=False)
@@ -25,7 +25,7 @@ def divide_dataset_by_char_sum(dataset, column_name, max_chars_threshold):
     return divided_datasets
 
 # 2000 *4 que é o limite de tokens a enviar, pois ainda falta somar os do prompt
-datasets = divide_dataset_by_char_sum(test, 'tweet', 8000)
+datasets = divide_dataset_by_char_sum(test, 'tweet', 5000)
 
 # Save the datasets into multiple CSV files with different names
 for i, dataset in enumerate(datasets):
