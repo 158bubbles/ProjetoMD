@@ -2,28 +2,10 @@
 import pandas as pd
 import requests
 import torch
-df = pd.read_csv('only_clean_tweets.csv')
-
-# df.iloc[262]['clean_tweet']
-
-# import requests
-# API_TOKEN = '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'
-# API_URL = "https://api-inference.huggingface.co/models/svalabs/twitter-xlm-roberta-bitcoin-sentiment"
-# headers = {"Authorization": f"Bearer {API_TOKEN}"}
-
-# def query(payload):
-# 	response = requests.post(API_URL, headers=headers, json=payload)
-# 	return response.json()
-
-
-# output = query({
-# 	"inputs": df.iloc[262]['clean_tweet'],
-# })
-
-# output
-
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-import torch
+
+
+df = pd.read_csv('./data/only_clean_tweets.csv')
 
 # Check if GPU is available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -64,11 +46,10 @@ label_map = {0: "NEGATIVE", 1: "NEUTRAL", 2: "POSITIVE"}
 # Map the predicted_labels
 predicted_labels = [label_map[label.item()] for label in predicted_labels]
 
-
 # Print the predicted labels for each tweet
 for tweet, label in zip(cleaned_tweets, predicted_labels):
     print(f"Tweet: {tweet}\nSentiment: {label}\n")
 
 df['Sentiment'] = predicted_labels
 
-df.to_csv('label_bert_zainalq7_tweets.csv', index=False)
+df.to_csv('./data/label_bert_zainalq7_tweets.csv', index=False)
