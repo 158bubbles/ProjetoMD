@@ -80,10 +80,23 @@ def analise_sentimento(texto: str, prompt: str, i: int) -> str:
     # Get the resulting text from the API response
     resultado = resposta_json['choices'][0]['text'].strip()
 
+    resultado = resultado.replace('\n', '')
+
+    # Find the start and end index of the sentiment list
+    start_index = resultado.find("[")
+    end_index = resultado.find("]") + 1
+
+    # Extract the context
+    context = resultado[start_index:end_index].strip("[]").split("', '")
+    # Remove the single quotes from all elements
+    context = [element.replace("'", "") for element in context]
+
     # Prepare the data to be saved in a JSON file
     data = {
-        'resultado': resultado,
+        'resultado': context,
     }
+
+    
 
     # Save the data to a JSON file
     with open(f'resultado_{i}.json', 'w') as file:
@@ -91,6 +104,6 @@ def analise_sentimento(texto: str, prompt: str, i: int) -> str:
 
     # Print a message indicating the result has been saved
     print("Resultado salvo em resultado.json")
-    
+    print(resposta_json)
     # Return the data and the JSON response
     return data, resposta_json
