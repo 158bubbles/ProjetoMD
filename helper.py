@@ -92,9 +92,7 @@ def analise_sentimento(texto: str, prompt: str, i: int) -> str:
     context = [element.replace("'", "") for element in context]
 
     # Prepare the data to be saved in a JSON file
-    data = {
-        'resultado': context,
-    }
+    data = context
 
     
 
