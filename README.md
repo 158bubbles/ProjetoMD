@@ -14,3 +14,4 @@ Projeto prático de Mineração de Dados
 [@Joana Oliveira](https://github.com/joanaaVO)
 
 
+Nota: De forma a utilizar a API da OpenAI (para fazer a classificação pelo modelo text-davinci-003) é necessário criar uma variável de ambiente CHAVE_API com o valor a chave de uma conta da OpenAI.
